@@ -1,6 +1,6 @@
-package a.b.c;
+package a.b.c.java;
 
-public class TestJava {
+public class Test01 {
 
     public static void main(String[] args) {
 
