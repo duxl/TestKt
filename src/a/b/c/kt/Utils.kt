@@ -5,7 +5,5 @@ fun printSplitLine() {
 }
 
 fun printSplitLine(name: String) {
-    println()
     println("—————————————————————————$name———————————————————————————")
-    println()
 }
