@@ -1,4 +1,6 @@
-package a.b.c.kt
+package a.b.c.kt.基础部分
+
+import a.b.c.kt.printSplitLine
 
 fun main() {
     testCreate()
