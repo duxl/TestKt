@@ -1,4 +1,4 @@
-package a.b.c.kt.`类、接口、枚举`
+package a.b.c.kt.类_接口_枚举
 
 /**
  * 类、接口默认访问符都是publish，private需要手动设置

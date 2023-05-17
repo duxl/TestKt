@@ -1,4 +1,4 @@
-package a.b.c.kt.`类、接口、枚举`
+package a.b.c.kt.类_接口_枚举
 
 // 执行顺序：①主构造函数②初始化块或属性③次构造函数
 // show Kotlin bytecode 反编译成java代码后会发现，

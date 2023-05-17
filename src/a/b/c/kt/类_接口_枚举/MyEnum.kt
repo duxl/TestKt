@@ -1,4 +1,4 @@
-package a.b.c.kt.`类、接口、枚举`
+package a.b.c.kt.类_接口_枚举
 
 /**
  * kt中枚举也是class
