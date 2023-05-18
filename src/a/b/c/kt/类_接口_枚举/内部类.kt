@@ -15,7 +15,7 @@ class OuterClass {
     }
 }
 
-// 2、inner的作用，内部类可以直接访问外部类的方法
+// 2、inner作用内部类持有外部类的实例，可以直接访问外部类的属性和方法
 class OuterClass2 {
     val outStr = "我是外部类"
 
