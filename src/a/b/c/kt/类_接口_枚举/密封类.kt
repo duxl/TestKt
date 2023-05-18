@@ -34,6 +34,8 @@ object YELLOW : Color("#FFF000")
 
 
 // 示例3：密封接口，不希望外部实现方法，提供有限的实现方法
+// kotlin1.5开始支持密封接口
+/*
 sealed interface People {
     fun sayHello()
 
@@ -49,6 +51,7 @@ sealed interface People {
         }
     }
 }
+*/
 
 // 示例4：密封类本身也可以继承其它类
 sealed class MyException(msg: String) : Exception(msg) {
@@ -65,7 +68,7 @@ fun main() {
     println("RED的十六进制${Color.RED.hex}")
 
     // 示例3
-    People.Man.sayHello()
+    /*People.Man.sayHello()*/
 
     // 示例4
     MyException.NullException.printStackTrace()
