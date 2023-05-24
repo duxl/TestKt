@@ -1,4 +1,4 @@
-package a.b.c.kt.类_接口_枚举
+package a.b.c.kt.类_接口_枚举.委托
 
 import kotlin.properties.Delegates
 
