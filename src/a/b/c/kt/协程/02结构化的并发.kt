@@ -12,7 +12,7 @@ import kotlinx.coroutines.*
 fun main() = runBlocking {
     printThread("1、runBlocking中打印")
     // launch开启一个新的协程，与其它代码异步执行
-    launch/*(Dispatchers.Default)*/ {
+    launch(Dispatchers.Default) {
         delay(1000)
         printThread("3、launch中打印")
     }
