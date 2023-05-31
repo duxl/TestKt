@@ -25,6 +25,6 @@ fun main() = runBlocking {
         System.currentTimeMillis()
     }
     // 需要withContext执行返回后才会执行下面的代码
-    printThread("5、runBlocking结束")
-    printThread("6、withContext协程中执行结果：$result")
+    printThread("5、withContext协程中执行结果：$result")
+    printThread("6、runBlocking结束")
 }
