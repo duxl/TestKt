@@ -8,15 +8,15 @@ fun main() = runBlocking {
     //testCancel03()
     //testCancel04()
     //testCancel05()
-    /*try {
+    try {
         // 超时自动取消
         testCancel06()
     } catch (e: TimeoutCancellationException) {
         println("超时cancel")
         e.printStackTrace()
-    }*/
+    }
     //testCancel07()
-    testCancel08()
+    //testCancel08()
 }
 
 // 打印3次后正常取消
@@ -119,12 +119,26 @@ suspend fun testCancel05() {
 
 // 超时自动取消
 suspend fun testCancel06() {
-    withTimeout(1500) {
+    /*
+    // withTimeout 超时后报异常
+    val result = withTimeout(1500) {
         repeat(1000) {
             println("waiting $it")
             delay(500)
         }
+        "ok"
     }
+    println("result=$result")*/
+
+    // withTimeoutOrNull超时后返回null
+    val result = withTimeoutOrNull(1000) {
+        repeat(1000) {
+            println("waiting $it")
+            delay(500)
+        }
+        "ok"
+    }
+    println(result)
 }
 
 // coroutineScope作用域下，一个协程异常了，其它兄弟协程也会被取消
