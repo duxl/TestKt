@@ -6,7 +6,8 @@ fun main() = runBlocking {
     //test01()
     //test02()
     //test03()
-    test04()
+    //test04()
+    test05()
 }
 
 // Default ：协程创建后立即开始调度。在调度前如果协程被取消。将其直接进入取消相应的状态。
@@ -53,4 +54,18 @@ suspend fun test04() {
     val job = GlobalScope.launch(context = Dispatchers.IO, start = CoroutineStart.UNDISPATCHED) {
         println("UNDISPATCHED立即在当前线程中执行，所以这里指定IO不起作用，也会在当前线程中执行：${Thread.currentThread().name}")
     }
+    job.join()
+}
+
+// 指定线程或线程池名称，调试特别有用
+suspend fun test05() {
+    val job1 = GlobalScope.launch(newSingleThreadContext("myThread")) {
+        println("使用newSingleThreadContext：${Thread.currentThread().name}")
+    }
+    job1.join()
+
+    val job2 = GlobalScope.launch(newFixedThreadPoolContext(3, "myThreadPoll")) {
+        println("使用newFixedThreadPoolContext：${Thread.currentThread().name}")
+    }
+    job2.join()
 }
