@@ -8,13 +8,15 @@ fun main() = runBlocking {
     //testCancel03()
     //testCancel04()
     //testCancel05()
-    try {
+    /*try {
         // 超时自动取消
         testCancel06()
     } catch (e: TimeoutCancellationException) {
         println("超时cancel")
         e.printStackTrace()
-    }
+    }*/
+    //testCancel07()
+    testCancel08()
 }
 
 // 打印3次后正常取消
@@ -121,6 +123,36 @@ suspend fun testCancel06() {
         repeat(1000) {
             println("waiting $it")
             delay(500)
+        }
+    }
+}
+
+// coroutineScope作用域下，一个协程异常了，其它兄弟协程也会被取消
+suspend fun testCancel07() {
+    GlobalScope.launch {
+        val job1 = launch {
+            delay(1000)
+            throw RuntimeException("job1异常了")
+            println("job1")
+        }
+        val job2 = launch {
+            delay(2000)
+            println("job2")
+        }
+    }.join()
+}
+
+// supervisorScope作用域下，一个协程异常了，不影响其它兄弟协程
+suspend fun testCancel08() {
+    supervisorScope {
+        val job1 = launch {
+            delay(1000)
+            throw RuntimeException("job1异常了")
+            println("job1")
+        }
+        val job2 = launch {
+            delay(2000)
+            println("job2正常结束")
         }
     }
 }
