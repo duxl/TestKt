@@ -3,9 +3,7 @@ package a.b.c.kt.协程.流
 import a.b.c.kt.协程.printThread
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.buffer
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.runBlocking
 import kotlin.system.measureTimeMillis
 
@@ -13,14 +11,16 @@ import kotlin.system.measureTimeMillis
 // 解决背压的方式：1使用buffer把生产者产出缓冲起来、2将生产者切换到其它线程中异步执行
 
 fun main() = runBlocking<Unit> {
-    testBackPressure01()
-    testBackPressure02()
-    testBackPressure03()
+    //testBackPressure01()
+    //testBackPressure02()
+    //testBackPressure03()
+    //testBackPressure04()
+    testBackPressure05()
 }
 
 // 每个100毫秒emit一个元素
-fun generateFlow() = flow {
-    repeat(3) {
+fun generateFlow(count: Int = 3) = flow {
+    repeat(count) {
         delay(100)
         printThread("emit $it")
         emit(it)
@@ -66,4 +66,30 @@ suspend fun testBackPressure03() {
                 }
     }
     printThread("使用异步解决背压总耗时：$time")
+}
+
+// 只收集最后一个元素
+suspend fun testBackPressure04() {
+    val time = measureTimeMillis {
+        generateFlow()
+                .collectLatest {
+                    delay(300)
+                    printThread("collect $it")
+                }
+    }
+    printThread("只收集最后一个元素总耗时：$time")
+}
+
+// conflate过滤掉来不及处理的元素
+suspend fun testBackPressure05() {
+    val time = measureTimeMillis {
+        generateFlow(10)
+                // conflate过滤掉来不及处理的元素
+                .conflate()
+                .collect {
+                    delay(300)
+                    printThread("collect $it")
+                }
+    }
+    printThread("使用conflate总耗时：$time")
 }
