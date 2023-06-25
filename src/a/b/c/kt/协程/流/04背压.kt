@@ -27,7 +27,7 @@ fun generateFlow() = flow {
     }
 }
 
-// 此示例会会参数背压，每隔100毫秒生产一个元素，每个300毫秒消费一个元素
+// 此示例会产生背压：每隔100毫秒生产一个元素，每个300毫秒消费一个元素
 // 导致一个元素的处理需要400毫秒，三个元素共计需要1200毫秒左右
 suspend fun testBackPressure01() {
     val time = measureTimeMillis {
