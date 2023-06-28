@@ -20,7 +20,7 @@ fun test01(n: Int) {
 
     /**
      * 惰性的意思是generateSequence一开始并不知道需要生成多少个元素
-     * 一致到filter&take条件完成后才不会在参数元素，否则会不断调用
+     * 至到filter&take条件完成后才不会在参数元素，否则会不断调用
      * generateSequence的lambda代码
      */
     generateSequence { r.nextInt() }
