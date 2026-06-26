@@ -60,13 +60,15 @@ suspend fun test04() {
 
 // 指定线程或线程池名称，调试特别有用
 suspend fun test05() {
-    val job1 = GlobalScope.launch(newSingleThreadContext("myThread")) {
-        println("使用newSingleThreadContext：${Thread.currentThread().name}")
+    val job1 = GlobalScope.launch(newSingleThreadContext("myThread") + CoroutineName("myThreadCoroutine")) {
+        println("使用newSingleThreadContext线程名称：${Thread.currentThread().name}")
+        println("使用newSingleThreadContext协程名称：${coroutineContext[CoroutineName]?.name}")
     }
     job1.join()
 
-    val job2 = GlobalScope.launch(newFixedThreadPoolContext(3, "myThreadPoll")) {
-        println("使用newFixedThreadPoolContext：${Thread.currentThread().name}")
+    val job2 = GlobalScope.launch(newFixedThreadPoolContext(3, "myThreadPoll") + CoroutineName("myThreadPollCoroutine")) {
+        println("使用newFixedThreadPoolContext线程名称：${Thread.currentThread().name}")
+        println("使用newFixedThreadPoolContext协程名称：${coroutineContext[CoroutineName]?.name}")
     }
     job2.join()
 }
