@@ -49,10 +49,11 @@ suspend fun test03() {
     job.start()
 }
 
-// 协程创建后理解在当前函数调用栈中被执行
+// 协程创建后理解在当前函数调用栈中被执行,直到遇到第一个挂起点才交由调度器继续运行
 suspend fun test04() {
     val job = GlobalScope.launch(context = Dispatchers.IO, start = CoroutineStart.UNDISPATCHED) {
         println("UNDISPATCHED立即在当前线程中执行，所以这里指定IO不起作用，也会在当前线程中执行：${Thread.currentThread().name}")
+        println("直到遇到第一个挂起点才交由调度器继续运行：${Thread.currentThread().name}")
     }
     job.join()
 }
