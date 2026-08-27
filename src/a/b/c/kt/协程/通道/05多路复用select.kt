@@ -50,6 +50,10 @@ suspend fun test02() = coroutineScope {
     // 获取第二快返回的结果
     val result2 = select { tasks.map { d -> d.onAwait { it } } }
     println("result2=$result2")
+
+    // todo 取消未完成的任务
+    // tasks[x].cancel()
+
 }
 
 
