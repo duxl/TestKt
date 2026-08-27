@@ -51,8 +51,9 @@ suspend fun test02() = coroutineScope {
     val result2 = select { tasks.map { d -> d.onAwait { it } } }
     println("result2=$result2")
 
-    // todo 取消未完成的任务
-    // tasks[x].cancel()
+    // 取消未完成的任务
+    // 已经完成的 Deferred 再调用 cancel() 不会有问题；尚未完成的请求则不会继续浪费资源
+    tasks.forEach { it.cancel() }
 
 }
 
